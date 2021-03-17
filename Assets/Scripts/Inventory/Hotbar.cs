@@ -34,7 +34,7 @@ public class Hotbar : MonoBehaviour
             if(selectedSlot + 1 >= hotbar.Capacity) { selectedSlot = 0; } //if already on right most slot, go back to the left most slot
             selectedSlot++; //next item
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             DropSelectedItem();
@@ -43,6 +43,7 @@ public class Hotbar : MonoBehaviour
         {
             UseSelectedItem();
         }
+        */
     }
 
     void UseSelectedItem()

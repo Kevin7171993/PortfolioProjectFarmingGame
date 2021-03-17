@@ -27,7 +27,7 @@ public class TileSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GlobalData.TileObjOffset = TileObjOffset;
+        GlobalData.gTileObjOffset = TileObjOffset;
     }
 
     // Update is called once per frame

@@ -16,4 +16,14 @@ public class itemPotatoSeed : GenericSeed
     {
         
     }
+
+    public override void Activate()
+    {
+        
+    }
+
+    public override void SpawnInWorld()
+    {
+        
+    }
 }

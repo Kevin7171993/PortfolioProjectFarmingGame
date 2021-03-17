@@ -9,7 +9,7 @@ public enum kItemType
 public class Item : MonoBehaviour
 {
     public Sprite mSprite;
-    public string name;
+    public string mName;
     public string id;
     public kItemType type;
     public string quantity;
@@ -34,5 +34,13 @@ public class Item : MonoBehaviour
     public virtual void SpawnInWorld()
     {
 
+    }
+}
+
+public class EmptyItem : Item
+{
+    public override void Start()
+    {
+        mName = "Empty";
     }
 }

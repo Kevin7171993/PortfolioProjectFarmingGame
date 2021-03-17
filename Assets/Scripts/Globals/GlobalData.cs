@@ -4,12 +4,13 @@ using UnityEngine;
 
 public static class GlobalData
 {
-    public static GameObject Player;
-    public static Vector3 TileObjOffset;
+    public static GameObject gPlayer;
+    public static InventoryUI gInventoryUI;
+    public static Vector3 gTileObjOffset;
 
     public static void GetInfo()
     {
-        Player = GameObject.Find("Player");
-        TileObjOffset = Player.GetComponent<TileSelector>().GetTileObjOffset();
+        gPlayer = GameObject.Find("Player");
+        gTileObjOffset = gPlayer.GetComponent<TileSelector>().GetTileObjOffset();
     }
 }

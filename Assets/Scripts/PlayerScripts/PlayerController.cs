@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GlobalData.Player = gameObject;
+        GlobalData.gPlayer = gameObject;
     }
 
     // Update is called once per frame
