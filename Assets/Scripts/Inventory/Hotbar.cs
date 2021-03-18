@@ -37,11 +37,11 @@ public class Hotbar : MonoBehaviour
         {
             DropSelectedItem();
         }
+        */
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             UseSelectedItem();
         }
-        */
     }
 
     void UseSelectedItem()

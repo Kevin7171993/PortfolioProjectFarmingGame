@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6883823687616482274
+--- !u!1 &3821694103909902843
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1720669132436522976}
-  - component: {fileID: 236241107423204440}
-  - component: {fileID: 498508295356493149}
+  - component: {fileID: 2350787448284938233}
+  - component: {fileID: 5988457021606928519}
+  - component: {fileID: 591305206828735931}
   m_Layer: 0
-  m_Name: CropPotato
+  m_Name: PotatoCrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1720669132436522976
+--- !u!4 &2350787448284938233
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6883823687616482274}
+  m_GameObject: {fileID: 3821694103909902843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 0.02, y: -0.02, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &236241107423204440
+--- !u!212 &5988457021606928519
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6883823687616482274}
+  m_GameObject: {fileID: 3821694103909902843}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b898e233afbde9b4489b942155a5eff1, type: 3}
-  m_Color: {r: 0.87843144, g: 0.54901963, b: 0.19607845, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,24 +83,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &498508295356493149
+--- !u!114 &591305206828735931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6883823687616482274}
+  m_GameObject: {fileID: 3821694103909902843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c34174c3f5175ee4d9051d52d7f1b6a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 411bfba953c58ba42be1a6fb20e905dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CropName: Potato Plant
+  CropName: Potato
+  watered: 0
   cropType: 1
+  TotalGrowthDays: 0
   GrowthTime: 3
-  GrowthStage: 0
+  GrowthStage: 1
   GrowSeason: 0
   CropSprites:
-  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b898e233afbde9b4489b942155a5eff1, type: 3}
+  CropColor:
+  - {r: 1, g: 0.63987595, b: 0.13679248, a: 1}

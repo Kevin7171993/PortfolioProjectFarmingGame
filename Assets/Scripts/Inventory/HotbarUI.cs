@@ -7,6 +7,8 @@ public class HotbarUI : InventoryUI
 
     [SerializeField]
     protected Hotbar mHotbar;
+    [SerializeField]
+    Vector3 CameraOffset;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -22,7 +24,9 @@ public class HotbarUI : InventoryUI
     // Update is called once per frame
     public override void Update()
     {
-        
+        var v = Camera.main.transform.position + CameraOffset;
+        v.z = 0.0f;
+        transform.position = v;
     }
 
     public override void Open()

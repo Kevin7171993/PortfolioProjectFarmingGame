@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class GenericSeed : Item
 {
-    public Crop mCrop;
+    [SerializeField]
+    protected GameObject cropPrefab;
 }

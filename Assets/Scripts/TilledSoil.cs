@@ -17,13 +17,4 @@ public class TilledSoil : MonoBehaviour
     {
         
     }
-
-    private void OnMouseDown()
-    {
-        if (UIManager.UILock) { return; } //Don't do anything when UI is open
-        if(GlobalData.gPlayer.GetComponent<TileSelector>().objCrop.GetComponent<Crop>() != null) //to be edited to plant specific crop that player is currently holding
-        {
-            mCrop = Instantiate(GlobalData.gPlayer.GetComponent<TileSelector>().objCrop.GetComponent<Crop>(), transform.position, new Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
-        }
-    }
 }

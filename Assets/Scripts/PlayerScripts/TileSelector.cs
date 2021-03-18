@@ -16,9 +16,10 @@ public class TileSelector : MonoBehaviour
     [SerializeField]
     private Vector3Int mSelectedTilePos; //Tilemap Pos
 
+    public float PlayerReach;
+
     //Selected Object Data
-    [SerializeField]
-    private GameObject mSelectedGameObj = null;
+    public GameObject mSelectedGameObj = null;
 
     //GameObject Data
     public GameObject objTilledSoil, objCrop;
@@ -67,7 +68,7 @@ public class TileSelector : MonoBehaviour
         Debug.Log("Invalid farm tile");
         return false;
     }
-    void GetTileData()
+    public void GetTileData()
     {
         var mV = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int tileMapPos = baseTilemap.WorldToCell(mV);
@@ -77,11 +78,17 @@ public class TileSelector : MonoBehaviour
         mSelectedTilePos = tileMapPos;
         mSelectedTileSprite = mTile.sprite;
     }
-    void TillSoil()
+    public void TillSoil()
     {
         if (CheckValidTile(mSelectedTileSprite, ref farmabletilesprites))
         {
-            Instantiate(objTilledSoil, mSelectedTileWorldPos + TileObjOffset, new Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
+            var v = mSelectedTileWorldPos + TileObjOffset;
+            v.z = 0.0f;
+            if (Vector3.Distance(gameObject.transform.position, v) > PlayerReach)
+            {
+                return;
+            }
+            Instantiate(objTilledSoil, v, new Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
         }
     }
     void PlantCrop()
@@ -92,7 +99,7 @@ public class TileSelector : MonoBehaviour
             Instantiate(objCrop, mSelectedTileWorldPos + TileObjOffset, new Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
         }
     }
-    void CheckGameObject()
+    public void CheckGameObject()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var mousePos2D = new Vector2(mousePos.x, mousePos.y);

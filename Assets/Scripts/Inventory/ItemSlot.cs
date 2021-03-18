@@ -33,6 +33,7 @@ public class ItemSlot : MonoBehaviour
         if(mItem != null)
         {
             mItem.transform.position = transform.position;
+            mItem.transform.parent = this.transform;
         }
     }
 
@@ -45,12 +46,12 @@ public class ItemSlot : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if(mHoverSprite != null && mHoverSprite.mSelected == null)
+        if(mHoverSprite != null && mHoverSprite.mSelected == null) //First slot selected
         {
             mHoverSprite.SelectItem(this);
             mItem.GetComponent<SpriteRenderer>().sortingOrder = -50;
         }
-        else if(mHoverSprite != null && mHoverSprite.mSelected != null)
+        else if(mHoverSprite != null && mHoverSprite.mSelected != null) //Second slot selected
         {
             //Swap item in the UI
             SwapItem(mHoverSprite.mSelected);

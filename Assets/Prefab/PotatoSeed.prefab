@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4939246196227616775}
   - component: {fileID: 2139049848502777702}
   - component: {fileID: 2116172626804998426}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PotatoSeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 31
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: b898e233afbde9b4489b942155a5eff1, type: 3}
   m_Color: {r: 0.9150943, g: 0.5742795, b: 0.20287468, a: 1}
   m_FlipX: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b632d9f5336d6a142ae3745abb3f1a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSprite: {fileID: 0}
+  mSprite: {fileID: 21300000, guid: b898e233afbde9b4489b942155a5eff1, type: 3}
   mName: Potato Seed
   id: 100
   type: 1
   quantity: 1
-  mCrop: {fileID: 0}
+  cropPrefab: {fileID: 3821694103909902843, guid: d0e51aac0d6687f458e2e68992fa384a, type: 3}

@@ -15,7 +15,8 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        IEnumerator mCoroutine = Initializer();
+        StartCoroutine(mCoroutine);
     }
 
     // Update is called once per frame
@@ -37,5 +38,13 @@ public class TimeManager : MonoBehaviour
             time.Month = 1;
             time.Year++;
         }
+        GlobalData.gCropManager.UpdateCrops();
+    }
+
+    IEnumerator Initializer()
+    {
+        yield return new WaitForFixedUpdate();
+        GlobalData.gTimeManager = this;
+        time = new GameTime();
     }
 }

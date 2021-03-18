@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemPotatoSeed : GenericSeed
+public class ItemHoe : Item //An item to till the field
 {
-    public TileSelector ts;
+    [SerializeField]
+    private TileSelector ts;
+
     // Start is called before the first frame update
     public override void Start()
     {
-        
+        mSprite = GetComponent<SpriteRenderer>().sprite;
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
+        
     }
 
     public override void Activate()
@@ -24,16 +26,12 @@ public class itemPotatoSeed : GenericSeed
             ts = GlobalData.gPlayer.GetComponent<TileSelector>();
         }
         ts.CheckGameObject();
-        if (ts.mSelectedGameObj == null) { return; } //No object clicked to begin with
-        TilledSoil buf = null;
-        buf = ts.mSelectedGameObj.GetComponent<TilledSoil>();
-        if (buf != null)
+        if(ts.mSelectedGameObj == null)
         {
-            GameObject buf1;
-            buf1 = Instantiate(cropPrefab, ts.mSelectedGameObj.transform);
-            buf1.transform.parent = ts.mSelectedGameObj.transform;
-            --quantity;
+            ts.GetTileData();
+            ts.TillSoil();
         }
+        ts.mSelectedGameObj = null;
     }
 
     public override void SpawnInWorld()
