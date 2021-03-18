@@ -7,13 +7,12 @@ public class InventoryUI : MonoBehaviour
     public bool mActive;
     public Vector3 mHidePos;
     public int slotsPerRow;
+    public List<ItemSlot> mSlots;
     [SerializeField]
-    List<ItemSlot> mSlots;
-    [SerializeField]
-    Inventory mInventory;
+    protected Inventory mInventory;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         mHidePos = new Vector3(9999.0f, 9999.0f, 0.0f);
         ItemSlot[] buffer = GetComponentsInChildren<ItemSlot>();
@@ -22,10 +21,11 @@ public class InventoryUI : MonoBehaviour
             mSlots[i] = buffer[i];
         }
         ParseInventory(ref mInventory);
+        GlobalData.gInventoryUI = this;
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (mActive) //Inventory UI is active
         {
@@ -41,21 +41,21 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void Open()
+    public virtual void Open()
     {
         if(UIManager.UILock) { return; }
         UIManager.UILock = true;
         mActive = true;
         
     }
-    public void Close()
+    public virtual void Close()
     {
         UIManager.UILock = false;
         //ClearSlots();
         mActive = false;
     }
 
-    public void ClearSlots() //Clear out the UI inventory slots
+    public virtual void ClearSlots() //Clear out the UI inventory slots
     {
         for (int i = 0; i < mSlots.Count; i++)
         {
@@ -78,12 +78,6 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < mSlots.Count; i++)
         {
             mInventory.items[i] = mSlots[i].mItem;
-            /*
-            if (i < mHotbarSlots.Count)
-            {
-                mHotbar.hotbar[i] = mHotbarSlots[i].mItem;
-            }
-            */
         }
     }
 }

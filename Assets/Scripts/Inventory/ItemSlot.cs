@@ -58,8 +58,8 @@ public class ItemSlot : MonoBehaviour
             mHoverSprite.Clear();
             Refresh();
             mItem.GetComponent<SpriteRenderer>().sortingOrder = 50;
-            //reflect changes to actual player inventory
-            GetComponentInParent<InventoryUI>().ReflectToInventory();
+            gInventoryUI.ReflectToInventory();
+            gHotbarUI.ReflectToHotbar();
         }
         
     }

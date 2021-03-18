@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4305688739002786359}
   - component: {fileID: 6039734046114713545}
+  - component: {fileID: 5938813339517681596}
+  - component: {fileID: 4083995758966622110}
   m_Layer: 0
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -82,3 +84,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5938813339517681596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131783899322218927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c12b7a59b48a4849af29aa6be9f54cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mItem: {fileID: 0}
+  mHoverSprite: {fileID: 0}
+--- !u!65 &4083995758966622110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131783899322218927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0377362, y: 1.0377356, z: 0.2}
+  m_Center: {x: -0.005047515, y: 0, z: 0}

@@ -33,6 +33,7 @@ public class TileSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             CheckGameObject();
@@ -45,6 +46,7 @@ public class TileSelector : MonoBehaviour
             }
             mSelectedGameObj = null;
         }
+        */
     }
 
     bool CheckValidTile(Sprite SelectedSprite, ref List<Sprite> SpritesToCheck)
