@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(UIManager.UILock) { return; }
         moveX = Input.GetAxis("Horizontal");
         moveY = Input.GetAxis("Vertical");
 

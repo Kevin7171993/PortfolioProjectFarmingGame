@@ -44,24 +44,69 @@ public class ItemSlot : MonoBehaviour
         v2.mItem = buffer;
     }
 
-    public void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         if(mHoverSprite != null && mHoverSprite.mSelected == null) //First slot selected
         {
+            if(mItem == null) { return; }
             mHoverSprite.SelectItem(this);
             mItem.GetComponent<SpriteRenderer>().sortingOrder = -50;
         }
         else if(mHoverSprite != null && mHoverSprite.mSelected != null) //Second slot selected
         {
-            //Swap item in the UI
-            SwapItem(mHoverSprite.mSelected);
-            mHoverSprite.mSelected.Refresh();
-            mHoverSprite.Clear();
-            Refresh();
-            mItem.GetComponent<SpriteRenderer>().sortingOrder = 50;
-            gInventoryUI.ReflectToInventory();
-            gHotbarUI.ReflectToHotbar();
+            if (mItem != null) //same item, add them together
+            {
+                if (mHoverSprite.mSelected.mItem.id == mItem.id && mHoverSprite.mSelected != this)
+                {
+                    mItem.quantity += mHoverSprite.mSelected.mItem.quantity;
+                    Destroy(mHoverSprite.mSelected.mItem.gameObject);
+                    mHoverSprite.DeepClear();
+                    Refresh();
+                    mItem.GetComponent<SpriteRenderer>().sortingOrder = 50;
+                    gInventoryUI.ReflectToInventory();
+                    gHotbarUI.ReflectToHotbar();
+                    return;
+                }
+            }
+             //Different item swap their position
+             //Swap item in the UI
+             SwapItem(mHoverSprite.mSelected);
+             mHoverSprite.mSelected.Refresh();
+             mHoverSprite.Clear();
+             Refresh();
+             mItem.GetComponent<SpriteRenderer>().sortingOrder = 50;
+             gInventoryUI.ReflectToInventory();
+             gHotbarUI.ReflectToHotbar();
         }
-        
+    }
+
+    public virtual void OnMouseOver()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (mHoverSprite != null && mHoverSprite.mSelected == null) //Split item
+            {
+                if(mItem == null) { return; }
+                if(mItem.quantity == 1) //if there is only 1 item, pick it up
+                {
+                    mHoverSprite.SelectItem(this);
+                    mItem.GetComponent<SpriteRenderer>().sortingOrder = -50;
+                }
+                else //otherwise split it
+                {
+                    GameObject buf = mItem.gameObject;
+                    int originalQuantity = mItem.quantity;
+                    int dividedQuantity = originalQuantity/2;
+                    int remainedQuantity = mItem.quantity - dividedQuantity;
+
+                    mItem.quantity = remainedQuantity;
+
+                    mHoverSprite.mSlot.mItem = Instantiate(buf).GetComponent<Item>();
+                    mHoverSprite.mSlot.mItem.quantity = dividedQuantity;
+                    mHoverSprite.mSlot.mItem.transform.localScale = mItem.transform.lossyScale;
+                    mHoverSprite.SelectItem(mHoverSprite.mSlot);
+                }
+            }
+        }
     }
 }

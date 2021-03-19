@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public bool mActive;
-    public Vector3 mHidePos;
+    public Vector3 mHidePos, mOffset;
     public int slotsPerRow;
     public List<ItemSlot> mSlots;
     [SerializeField]
@@ -30,6 +30,7 @@ public class InventoryUI : MonoBehaviour
         if (mActive) //Inventory UI is active
         {
             var v = Camera.main.transform.position;
+            v += mOffset;
             v.z = 0.0f;
             transform.position = v;
         }
@@ -46,7 +47,6 @@ public class InventoryUI : MonoBehaviour
         if(UIManager.UILock) { return; }
         UIManager.UILock = true;
         mActive = true;
-        
     }
     public virtual void Close()
     {

@@ -5,6 +5,7 @@ using static StandardFunctionLib;
 
 public class Inventory : MonoBehaviour
 {
+    public int money;
     [SerializeField]
     private int size;
     public List<Item> items;

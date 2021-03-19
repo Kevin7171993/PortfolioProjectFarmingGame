@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public enum kItemType
 {
     none,
@@ -14,11 +15,14 @@ public class Item : MonoBehaviour
     public string id;
     public kItemType type;
     public int quantity;
+    public int basePrice;
+    [SerializeField]
+    Text quantityText;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        quantityText = GetComponent<Text>();
     }
 
     // Update is called once per frame

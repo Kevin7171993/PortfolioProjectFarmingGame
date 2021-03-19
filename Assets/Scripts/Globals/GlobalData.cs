@@ -10,6 +10,8 @@ public static class GlobalData
     public static TimeManager gTimeManager;
     public static CropManager gCropManager;
     public static ScreenTransition gScreenTransition;
+    public static UIHoverSprite gUIHoverSprite;
+    public static UIVendor gUIVendor;
     public static Vector3 gTileObjOffset;
     
 

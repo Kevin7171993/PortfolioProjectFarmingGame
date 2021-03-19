@@ -6,16 +6,23 @@ public class UIHoverSprite : MonoBehaviour
 {
     public Sprite mSprite = null;
     public ItemSlot mSelected = null;
-
+    public ItemSlot mSlot;
     Vector3 mousePos;
+
     // Start is called before the first frame update
     void Start()
     {
+        GlobalData.gUIHoverSprite = this;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(mSlot.mItem != null)
+        {
+            mSprite = mSlot.mItem.mSprite;
+            SelectItem(mSlot);
+        }
         if(mSprite != null)
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -37,5 +44,11 @@ public class UIHoverSprite : MonoBehaviour
         mSelected = null;
         mSprite = null;
         GetComponent<SpriteRenderer>().sprite = null;
+    }
+
+    public void DeepClear()
+    {
+        Clear();
+        mSlot.mItem = null;
     }
 }
