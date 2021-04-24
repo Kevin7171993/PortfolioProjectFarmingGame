@@ -55,14 +55,14 @@ public class TileSelector : MonoBehaviour
         if(SelectedSprite == null)
         {
             return false;
-            Debug.Log("Null tile");
+            //Debug.Log("Null tile");
         }
         for (int i = 0; i < SpritesToCheck.Count; i++)
         {
             if(SelectedSprite == SpritesToCheck[i])
             {
                 return true;
-                Debug.Log("Valid farm tile");
+                //Debug.Log("Valid farm tile");
             }
         }
         Debug.Log("Invalid farm tile");

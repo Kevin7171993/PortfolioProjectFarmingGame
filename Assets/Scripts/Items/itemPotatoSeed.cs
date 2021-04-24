@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class itemPotatoSeed : GenericSeed
 {
-    public TileSelector ts;
     // Start is called before the first frame update
     public override void Start()
     {

@@ -11,7 +11,12 @@ public class UIVendor : MonoBehaviour
     List<Item> parsedList;
     [SerializeField]
     private Item dummyItem;
+
+    //Variables added for scrolling functionalities
+    private Vector2 scrollWheel;
+    bool isEnabled = false;
     int index = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +30,45 @@ public class UIVendor : MonoBehaviour
         {
             Hide();
         }
+
+        //Scrolling item list codes
+        if(isEnabled)
+        {
+            scrollWheel = Input.mouseScrollDelta;
+            if (scrollWheel.y < 0.0f) //scroll down
+            {
+                if(index + pb.Count < parsedList.Count) { index++; }
+                else { return; }
+                for (int i = 0; i < pb.Count; i++)
+                {
+                    if(index + 1 < parsedList.Count)
+                    {
+                        pb[i].ParseItem(parsedList[index + i]);
+                    }
+                    else
+                    {
+                        pb[i].ParseDummy(dummyItem);
+                        index++;
+                    }
+                }
+            }
+            else if (scrollWheel.y > 0.0f) //scroll up
+            {
+                if (index - 1 >= 0) { index--; }
+                else { return; }
+                for (int i = 0; i < pb.Count; i++)
+                {
+                    if (index + 1 < parsedList.Count)
+                    {
+                        pb[i].ParseItem(parsedList[index + i]);
+                    }
+                    else
+                    {
+                        pb[i].ParseDummy(dummyItem);
+                    }
+                }
+            }
+        }
     }
 
     public void Open(List<Item> listing)
@@ -35,6 +79,9 @@ public class UIVendor : MonoBehaviour
         v += mOffset;
         v.z = 0.0f;
         transform.position = v;
+        isEnabled = true;
+
+        index = 0;
         parsedList = new List<Item>(listing);
         int i = 0;
         while(i < pb.Count)
