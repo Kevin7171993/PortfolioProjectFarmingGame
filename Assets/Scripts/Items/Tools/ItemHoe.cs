@@ -10,6 +10,7 @@ public class ItemHoe : Item //An item to till the field
     // Start is called before the first frame update
     public override void Start()
     {
+        base.Start();
         mSprite = GetComponent<SpriteRenderer>().sprite;
     }
 

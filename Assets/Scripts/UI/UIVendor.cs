@@ -8,6 +8,10 @@ public class UIVendor : MonoBehaviour
     Vector3 mHidePos, mOffset;
     [SerializeField]
     List<PurchaseButton> pb;
+    List<Item> parsedList;
+    [SerializeField]
+    private Item dummyItem;
+    int index = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,7 @@ public class UIVendor : MonoBehaviour
         }
     }
 
-    public void Open()
+    public void Open(List<Item> listing)
     {
         if(UIManager.UILock) { return; }
         GlobalData.gInventoryUI.Open();
@@ -31,10 +35,33 @@ public class UIVendor : MonoBehaviour
         v += mOffset;
         v.z = 0.0f;
         transform.position = v;
+        parsedList = new List<Item>(listing);
+        int i = 0;
+        while(i < pb.Count)
+        {
+            switch (i)
+            {
+                case var _ when i >= parsedList.Count: // that's all the list have that can be parsed, so quit it
+                    {
+                        //TODO: Add code to parse for dummy item
+                        pb[i].ParseDummy(dummyItem);
+                        break;
+                    }
+                case var _ when i < parsedList.Count: //when the parsed list have an item, parse it
+                    {
+                        pb[i].ParseItem(parsedList[i]);
+                        break;
+                    }
+                default:
+                    break;
+            }
+            ++i;
+        }
     }
     public void Hide()
     {
         transform.position = mHidePos;
         GlobalData.gInventoryUI.Close();
+        index = 0;
     }
 }

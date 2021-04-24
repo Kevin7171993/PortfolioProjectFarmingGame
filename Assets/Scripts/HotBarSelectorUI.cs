@@ -6,6 +6,8 @@ public class HotBarSelectorUI : MonoBehaviour
 {
     [SerializeField]
     Hotbar mHotbar;
+    [SerializeField]
+    Vector3 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,7 @@ public class HotBarSelectorUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = gHotbarUI.mSlots[mHotbar.selectedSlot].transform.position;
+        transform.position = gHotbarUI.mSlots[mHotbar.selectedSlot].transform.position + offset;
         this.transform.parent = gHotbarUI.mSlots[mHotbar.selectedSlot].transform;
     }
 }
