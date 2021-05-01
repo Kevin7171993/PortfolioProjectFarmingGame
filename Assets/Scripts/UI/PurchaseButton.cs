@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static GlobalData;
 
-public class PurchaseButton : MonoBehaviour
+public class PurchaseButton : MonoBehaviour, UnityEngine.EventSystems.IPointerClickHandler
 {
     [SerializeField]
     GameObject mItemObj;
@@ -14,7 +14,7 @@ public class PurchaseButton : MonoBehaviour
     int price;
     string sprice;
     [SerializeField]
-    SpriteRenderer sr, itemSr, currencySr;
+    Image sr, itemSr, currencySr;
     [SerializeField]
     Text itemName, cost;
 
@@ -71,7 +71,8 @@ public class PurchaseButton : MonoBehaviour
         price = mItem.basePrice;
         cost.text = "$" + price.ToString(); //Change this when i have a sprite for currency
         itemSr.sprite = _item.mSprite;
-        itemSr.color = _item.GetComponent<SpriteRenderer>().color;
+        itemSr.color = _item.GetComponent<Image>().color;
+        itemSr.GetComponent<RectTransform>().sizeDelta = _item.GetComponent<RectTransform>().sizeDelta;
         sellable = true;
     }
 
@@ -94,5 +95,47 @@ public class PurchaseButton : MonoBehaviour
         itemName.text = "";
         cost.text = "";
         itemSr.sprite = null;
+    }
+
+    public virtual void OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
+    {
+        //if(Input.GetMouseButtonUp(0)) { return; }
+        switch (eventData.button)
+        {
+            case UnityEngine.EventSystems.PointerEventData.InputButton.Left: //Select Item
+                {
+                    if (!sellable) { return; }
+                    if (gUIHoverSprite.mSelected == null) //nothing is selected
+                    {
+                        if (gPlayer.GetComponent<Inventory>().money >= price)
+                        {
+                            gUIHoverSprite.mSlot.mItem = Instantiate(mItemObj).GetComponent<Item>();
+                            gUIHoverSprite.SelectItem(gUIHoverSprite.mSlot);
+                            gPlayer.GetComponent<Inventory>().money -= price;
+                        }
+                    }
+                    else if (gUIHoverSprite.mSelected.mItem.id == mItem.id) //if selected item has the same id, it means it's the same item
+                    {
+                        if (gPlayer.GetComponent<Inventory>().money >= price)
+                        {
+                            gUIHoverSprite.mSelected.mItem.quantity++;
+                            gPlayer.GetComponent<Inventory>().money -= price;
+                        }
+                    }
+                    else //if different kind of item is selected
+                    {
+                        if (gUIHoverSprite.mSelected.mItem.basePrice >= 0) //anything worth 0 or higher is sellable
+                        {
+                            gPlayer.GetComponent<Inventory>().money += gUIHoverSprite.mSelected.mItem.basePrice * gUIHoverSprite.mSelected.mItem.quantity;
+                            Destroy(gUIHoverSprite.mSelected.mItem);
+                            gUIHoverSprite.mSelected.Unregister();
+                            gUIHoverSprite.Clear();
+                        }
+                    }
+                    break;
+                }
+            default:
+                break;
+        }
     }
 }

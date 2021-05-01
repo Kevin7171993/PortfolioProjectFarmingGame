@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
     public int quantity;
     public int basePrice;
     [SerializeField]
-    Text quantityText;
+    public Text quantityText;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -29,6 +29,10 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        if (quantityText != null)
+        {
+            quantityText.text = quantity.ToString();
+        }
         if(quantity <= 0)
         {
             GameObject.Destroy(this.gameObject);

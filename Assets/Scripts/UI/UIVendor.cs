@@ -5,12 +5,16 @@ using UnityEngine;
 public class UIVendor : MonoBehaviour
 {
     [SerializeField]
-    Vector3 mHidePos, mOffset;
+    Vector3 mHidePos;
+    [SerializeField]
+    RectTransform AnchorPoint;
     [SerializeField]
     List<PurchaseButton> pb;
     List<Item> parsedList;
     [SerializeField]
     private Item dummyItem;
+    [SerializeField]
+    private UI_Anim_UpDownArrow upArrow, downArrow;
 
     //Variables added for scrolling functionalities
     private Vector2 scrollWheel;
@@ -21,6 +25,12 @@ public class UIVendor : MonoBehaviour
     void Start()
     {
         GlobalData.gUIVendor = this;
+        transform.position = mHidePos;
+        index = 0;
+        upArrow.mEnabled = false;
+        downArrow.mEnabled = false;
+        upArrow.mVisible = false;
+        downArrow.mVisible = false;
     }
 
     // Update is called once per frame
@@ -37,8 +47,12 @@ public class UIVendor : MonoBehaviour
             scrollWheel = Input.mouseScrollDelta;
             if (scrollWheel.y < 0.0f) //scroll down
             {
-                if(index + pb.Count < parsedList.Count) { index++; }
-                else { return; }
+                if(index + pb.Count < parsedList.Count) { index++; upArrow.mVisible = true; }
+                else
+                {
+                    return; 
+                }
+
                 for (int i = 0; i < pb.Count; i++)
                 {
                     if(index + 1 < parsedList.Count)
@@ -51,11 +65,15 @@ public class UIVendor : MonoBehaviour
                         index++;
                     }
                 }
+                if (index + pb.Count >= parsedList.Count) { downArrow.mVisible = false; }
             }
             else if (scrollWheel.y > 0.0f) //scroll up
             {
-                if (index - 1 >= 0) { index--; }
-                else { return; }
+                if (index - 1 >= 0) { index--; downArrow.mVisible = true; }
+                else 
+                {
+                    return;
+                }
                 for (int i = 0; i < pb.Count; i++)
                 {
                     if (index + 1 < parsedList.Count)
@@ -67,6 +85,7 @@ public class UIVendor : MonoBehaviour
                         pb[i].ParseDummy(dummyItem);
                     }
                 }
+                if(index - 1 <= 0) { upArrow.mVisible = false; }
             }
         }
     }
@@ -75,11 +94,12 @@ public class UIVendor : MonoBehaviour
     {
         if(UIManager.UILock) { return; }
         GlobalData.gInventoryUI.Open();
-        var v = Camera.main.transform.position;
-        v += mOffset;
-        v.z = 0.0f;
-        transform.position = v;
+        transform.position = AnchorPoint.position;
         isEnabled = true;
+        upArrow.mEnabled = true;
+        downArrow.mEnabled = true;
+        upArrow.mVisible = false;
+        downArrow.mVisible = true;
 
         index = 0;
         parsedList = new List<Item>(listing);
@@ -110,5 +130,9 @@ public class UIVendor : MonoBehaviour
         transform.position = mHidePos;
         GlobalData.gInventoryUI.Close();
         index = 0;
+        upArrow.mEnabled = false;
+        downArrow.mEnabled = false;
+        upArrow.mVisible = false;
+        downArrow.mVisible = false;
     }
 }

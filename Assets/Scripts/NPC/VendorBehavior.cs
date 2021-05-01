@@ -16,7 +16,7 @@ public class VendorBehavior : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         if(UIManager.UILock) { return; }
         GlobalData.gUIVendor.Open(mShopListing);

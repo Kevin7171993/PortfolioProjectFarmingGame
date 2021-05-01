@@ -6,7 +6,9 @@ public class UIHoverSprite : MonoBehaviour
 {
     public Sprite mSprite = null;
     public ItemSlot mSelected = null;
-    public ItemSlot mSlot;
+    public ItemSlot mSlot, mOver;
+    [SerializeField]
+    UnityEngine.UI.Text QuantityText;
     Vector3 mousePos;
 
     // Start is called before the first frame update
@@ -34,21 +36,33 @@ public class UIHoverSprite : MonoBehaviour
     public void SelectItem(ItemSlot _selected)
     {
         mSelected = _selected;
-        GetComponent<SpriteRenderer>().color = mSelected.mItem.GetComponent<SpriteRenderer>().color;
+        //Old code, get rid of it
+        //if (mSelected.mItem.GetComponent<UnityEngine.UI.Image>() != null)
+        //    GetComponent<UnityEngine.UI.Image>().color = mSelected.mItem.GetComponent<UnityEngine.UI.Image>().color;
+        //else
+        GetComponent<UnityEngine.UI.Image>().color = mSelected.mItem.GetComponent<UnityEngine.UI.Image>().color;
         mSprite = mSelected.mItem.mSprite;
-        GetComponent<SpriteRenderer>().sprite = mSprite;
+        mSelected.mItem.transform.parent = mSlot.transform;
+        mSelected.mItem.transform.localScale = Vector3.one;
+        GetComponent<RectTransform>().sizeDelta = mSelected.mItem.GetComponent<RectTransform>().sizeDelta;
+        GetComponent<UnityEngine.UI.Image>().sprite = mSprite;
+        QuantityText.text = mSelected.mItem.quantity.ToString();
+        QuantityText.color = mSelected.mItem.quantityText.color;
     }
 
     public void Clear()
     {
         mSelected = null;
         mSprite = null;
-        GetComponent<SpriteRenderer>().sprite = null;
+        GetComponent<UnityEngine.UI.Image>().color = Color.clear;
+        GetComponent<UnityEngine.UI.Image>().sprite = null;
+        QuantityText.text = "";
+        QuantityText.color = Color.clear;
     }
 
     public void DeepClear()
     {
-        Clear();
         mSlot.mItem = null;
+        Clear();
     }
 }

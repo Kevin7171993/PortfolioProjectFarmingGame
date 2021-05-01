@@ -24,9 +24,10 @@ public class HotbarUI : InventoryUI
     // Update is called once per frame
     public override void Update()
     {
-        var v = Camera.main.transform.position + CameraOffset;
-        v.z = 0.0f;
-        transform.position = v;
+        //Obsolete
+        //var v = Camera.main.transform.position + CameraOffset;
+        //v.z = 0.0f;
+        //transform.position = v;
     }
 
     public override void Open()

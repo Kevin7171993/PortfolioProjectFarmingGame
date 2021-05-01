@@ -6,12 +6,13 @@ public class InventoryUI : MonoBehaviour
 {
     //Standard InventoryUI variables
     public bool mActive;
-    public Vector3 mHidePos, mOffset;
+    public Vector3 mHidePos;
+    [SerializeField]
+    private RectTransform AnchorPoint;
     public int slotsPerRow;
     public List<ItemSlot> mSlots;
     [SerializeField]
     protected Inventory mInventory;
-
     //Item slot scaling animation variables
     private bool mPlayedTransition = false;
     [SerializeField]
@@ -37,30 +38,32 @@ public class InventoryUI : MonoBehaviour
         popcSpeed = popSpeed;
         UI_popcSpeed = UI_popSpeed;
         GlobalData.gInventoryUI = this;
+        transform.position = mHidePos;
     }
 
     public virtual void Update()
     {
         if (mActive) //Inventory UI is active
         {
-            var v = Camera.main.transform.position;
-            v += mOffset;
-            v.z = 0.0f;
-            transform.position = v;
+            ///Old code, get rid of it
+            //var v = Camera.main.transform.position;
+            //v += mOffset;
+            //v.z = 0.0f;
+            //transform.position = v;
+
+            transform.position = AnchorPoint.transform.position;
+            //Animated Transition Code
             UIPopIn();
             PopIn(popcSpeed, popAccelerationFactor);
         }
         else //Inventory UI is inactive
         {
             if(!UIPopOut()) { return; }
-            var v = Camera.main.transform.position;
-            v.z = 0.0f;
-            transform.position = v + mHidePos;
-            //if (mPlayedTransition)
-            //{ 
-            //    PopOut();
-            //    mPlayedTransition = false;
-            //}
+            //Old Code, get rid of it
+            //var v = Camera.main.transform.position;
+            //v.z = 0.0f;
+            //transform.position = v + mHidePos;
+            transform.position = mHidePos;
         }
     }
 
