@@ -100,7 +100,7 @@ MonoBehaviour:
   id: 100
   type: 1
   quantity: 1
-  basePrice: 0
+  basePrice: 20
   quantityText: {fileID: 0}
-  cropPrefab: {fileID: 3821694103909902843, guid: d0e51aac0d6687f458e2e68992fa384a, type: 3}
   ts: {fileID: 0}
+  cropPrefab: {fileID: 3821694103909902843, guid: d0e51aac0d6687f458e2e68992fa384a, type: 3}

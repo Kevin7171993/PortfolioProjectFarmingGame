@@ -6,29 +6,50 @@ public class GlobalObjects : MonoBehaviour
 {
     [SerializeField]
     InventoryUI inventoryUI;
+    [SerializeField]
+    Color ScreenTransitionUILockColor;
+    [SerializeField]
+    Vector3 ItemSlotHoverScale;
+
     void Start()
     {
-        GlobalData.GetInfo();
+        GetInfo();
+        gItemSlotHoverScale = ItemSlotHoverScale;
+        gObjects = this;
     }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
             if (inventoryUI.mActive)
+            {
                 CloseInventoryUI();
+                gUIVendor.Hide();
+            }
             else
                 OpenInventoryUI();
         }
+        if(UIManager.UILock)
+        {
+            gScreenTransition.SetFilterColor(ScreenTransitionUILockColor);
+        }
+        else
+        {
+            gScreenTransition.SetFilterColor(Color.clear);
+        }
     }
 
-    void OpenInventoryUI()
+    public void OpenInventoryUI()
     {
         //inventoryUI.gameObject.SetActive(true);
         inventoryUI.Open();
+        gUIPlayerMoney.ResetLerp();
+        gUIPlayerMoney.SetInventoryAnchor();
     }
-    void CloseInventoryUI()
+    public void CloseInventoryUI()
     {
         inventoryUI.Close();
+        gUIPlayerMoney.SetNormalAnchor();
         //inventoryUI.gameObject.SetActive(false);
     }
 }

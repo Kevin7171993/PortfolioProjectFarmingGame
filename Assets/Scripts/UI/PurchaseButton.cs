@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static GlobalData;
 
-public class PurchaseButton : MonoBehaviour, UnityEngine.EventSystems.IPointerClickHandler
+public class PurchaseButton : MonoBehaviour, UnityEngine.EventSystems.IPointerClickHandler, UnityEngine.EventSystems.IPointerEnterHandler, UnityEngine.EventSystems.IPointerExitHandler
 {
     [SerializeField]
     GameObject mItemObj;
@@ -17,13 +17,18 @@ public class PurchaseButton : MonoBehaviour, UnityEngine.EventSystems.IPointerCl
     Image sr, itemSr, currencySr;
     [SerializeField]
     Text itemName, cost;
-
+    [SerializeField]
+    LerpRotate coinImg;
+    [SerializeField]
+    Color hoverColor;
+    Color originalColor;
     bool sellable = false;
     // Start is called before the first frame update
     void Start()
     {
         //Clear();
         //ParseItem(mItemObj.GetComponent<Item>());
+        originalColor = GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -138,4 +143,16 @@ public class PurchaseButton : MonoBehaviour, UnityEngine.EventSystems.IPointerCl
                 break;
         }
     }
+    public virtual void OnPointerEnter(UnityEngine.EventSystems.PointerEventData eventData)
+    {
+        GetComponent<Image>().color = hoverColor;
+        coinImg.SetPause(false);
+    }
+    public virtual void OnPointerExit(UnityEngine.EventSystems.PointerEventData eventData)
+    {
+        GetComponent<Image>().color = originalColor;
+        coinImg.SetPause(true);
+        coinImg.SetDefault();
+    }
+
 }

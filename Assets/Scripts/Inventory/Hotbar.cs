@@ -24,23 +24,29 @@ public class Hotbar : MonoBehaviour
 
         if(scrollWheel.y > 0.0f) //Scrolling up
         {
-            if(selectedSlot - 1 < 0) { selectedSlot = hotbar.Capacity - 1; return; } //if already on left most slot, go to right most slot instead 
-            --selectedSlot;
+            if (hotbar[selectedSlot] != null) //If not null scale the object back down
+            { 
+                hotbar[selectedSlot].transform.localScale = Vector3.one; 
+            }
+            if (selectedSlot - 1 < 0) { selectedSlot = hotbar.Capacity - 1; } //if already on left most slot, go to right most slot instead 
+            else { --selectedSlot; } //previous item
         }
         if(scrollWheel.y < 0.0f) //Scrolling down
         {
-            if(selectedSlot + 1 >= hotbar.Capacity) { selectedSlot = 0; return; } //if already on right most slot, go back to the left most slot
-            selectedSlot++; //next item
+            if (hotbar[selectedSlot] != null) //If not null scale the object back down
+            {
+                hotbar[selectedSlot].transform.localScale = Vector3.one;
+            }
+            if (selectedSlot + 1 >= hotbar.Capacity) { selectedSlot = 0; } //if already on right most slot, go back to the left most slot
+            else { selectedSlot++; } //next item
         }
-        /*
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            DropSelectedItem();
-        }
-        */
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             UseSelectedItem();
+        }
+        if(hotbar[selectedSlot] != null)
+        {
+            hotbar[selectedSlot].transform.localScale = GlobalData.gItemSlotHoverScale;
         }
     }
 

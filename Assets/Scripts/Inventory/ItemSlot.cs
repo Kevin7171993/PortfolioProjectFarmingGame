@@ -8,6 +8,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public Item mItem = null;
     public UIHoverSprite mHoverSprite = null;
     bool lockRefresh = false;
+    public string debugStr = "Item Slot Swap";
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +37,14 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         if(mItem != null)
         {
             mItem.transform.position = transform.position;
-            mItem.transform.parent = this.transform;
+            mItem.transform.SetParent(this.transform);
         }
         lockRefresh = false;
     }
 
     public void SwapItem(ItemSlot v2) //swap item between two slots
     {
+        Debug.Log(debugStr);
         Item buffer = mItem;
         mItem = v2.mItem;
         v2.mItem = buffer;
@@ -187,12 +189,28 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         }
     }
 
+    public void CheckSlot()
+    {
+        if(mItem == null && transform.childCount > 0)
+        {
+            mItem = transform.GetChild(0).GetComponent<Item>();
+            gUIHoverSprite.Clear();
+            gUIHoverSprite.DeepClear();
+        }
+    }
+
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        gUIHoverSprite.mOver = this;
+        if (mItem != null)
+        {
+            mItem.transform.localScale = gItemSlotHoverScale;
+        }
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        gUIHoverSprite.mOver = null;
+        if (mItem != null)
+        {
+            mItem.transform.localScale = Vector3.one;
+        }
     }
 }

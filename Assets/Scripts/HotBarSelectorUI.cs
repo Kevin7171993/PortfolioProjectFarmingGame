@@ -17,6 +17,6 @@ public class HotBarSelectorUI : MonoBehaviour
     void Update()
     {
         transform.position = gHotbarUI.mSlots[mHotbar.selectedSlot].transform.position + offset;
-        this.transform.parent = gHotbarUI.mSlots[mHotbar.selectedSlot].transform;
+        this.transform.SetParent(gHotbarUI.mSlots[mHotbar.selectedSlot].transform);
     }
 }

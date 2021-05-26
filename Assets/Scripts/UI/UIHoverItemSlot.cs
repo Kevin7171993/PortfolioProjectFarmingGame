@@ -8,8 +8,8 @@ public class UIHoverItemSlot : ItemSlot
     // Start is called before the first frame update
     void Start()
     {
+        debugStr = "Hover Slot Swap";
     }
-
     // Update is called once per frame
     void Update()
     {

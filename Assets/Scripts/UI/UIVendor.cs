@@ -93,7 +93,7 @@ public class UIVendor : MonoBehaviour
     public void Open(List<Item> listing)
     {
         if(UIManager.UILock) { return; }
-        GlobalData.gInventoryUI.Open();
+        GlobalData.gObjects.OpenInventoryUI();
         transform.position = AnchorPoint.position;
         isEnabled = true;
         upArrow.mEnabled = true;
@@ -128,7 +128,7 @@ public class UIVendor : MonoBehaviour
     public void Hide()
     {
         transform.position = mHidePos;
-        GlobalData.gInventoryUI.Close();
+        GlobalData.gObjects.CloseInventoryUI();
         index = 0;
         upArrow.mEnabled = false;
         downArrow.mEnabled = false;

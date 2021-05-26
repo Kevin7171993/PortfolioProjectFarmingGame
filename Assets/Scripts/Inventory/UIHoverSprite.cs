@@ -6,7 +6,7 @@ public class UIHoverSprite : MonoBehaviour
 {
     public Sprite mSprite = null;
     public ItemSlot mSelected = null;
-    public ItemSlot mSlot, mOver;
+    public ItemSlot mSlot;
     [SerializeField]
     UnityEngine.UI.Text QuantityText;
     Vector3 mousePos;
@@ -42,7 +42,7 @@ public class UIHoverSprite : MonoBehaviour
         //else
         GetComponent<UnityEngine.UI.Image>().color = mSelected.mItem.GetComponent<UnityEngine.UI.Image>().color;
         mSprite = mSelected.mItem.mSprite;
-        mSelected.mItem.transform.parent = mSlot.transform;
+        mSelected.mItem.transform.SetParent(mSlot.transform);
         mSelected.mItem.transform.localScale = Vector3.one;
         GetComponent<RectTransform>().sizeDelta = mSelected.mItem.GetComponent<RectTransform>().sizeDelta;
         GetComponent<UnityEngine.UI.Image>().sprite = mSprite;
@@ -62,7 +62,17 @@ public class UIHoverSprite : MonoBehaviour
 
     public void DeepClear()
     {
+        mSelected.mItem = null;
         mSlot.mItem = null;
         Clear();
+    }
+
+    public void CheckSlot()
+    {
+        if(mSlot.transform.childCount >= 1)
+        {
+            mSlot.mItem = mSlot.transform.GetChild(0).GetComponent<Item>();
+            SelectItem(mSlot);
+        }
     }
 }

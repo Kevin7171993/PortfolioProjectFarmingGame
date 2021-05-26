@@ -38,6 +38,12 @@ public class ScreenTransition : MonoBehaviour
         }
     }
 
+    //Set colors
+    public void SetFilterColor(Color col)
+    {
+        screenTransition.color = col;
+    }
+
     //--Fade in Fade out
     public void FadeInFadeOut(float fadeInTime, float fadeOutTime)
     {
