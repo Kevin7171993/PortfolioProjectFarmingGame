@@ -11,11 +11,16 @@ public class GlobalObjects : MonoBehaviour
     [SerializeField]
     Vector3 ItemSlotHoverScale;
 
+    public string Language;
+
+    private void Awake()
+    {
+        gObjects = this;
+    }
     void Start()
     {
         GetInfo();
         gItemSlotHoverScale = ItemSlotHoverScale;
-        gObjects = this;
     }
     void Update()
     {

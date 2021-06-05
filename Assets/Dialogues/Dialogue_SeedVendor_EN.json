@@ -1,0 +1,14 @@
+{
+  "dialogues": {
+    "npc_chat_1": [
+      "Welcome!",
+      "Welcome to my seed shop.",
+      "How are you?"
+    ],
+    "npc_chat_2": [
+      "Good morning!",
+      "I sell high quality seeds!",
+      "I also sell farming tools!"
+    ]
+  }
+}

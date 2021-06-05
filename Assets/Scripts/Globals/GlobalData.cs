@@ -7,6 +7,7 @@ public static class GlobalData
     public static GameObject gPlayer;
     public static InventoryUI gInventoryUI;
     public static HotbarUI gHotbarUI;
+    public static UIDialogueBox gDialogueBoxUI;
     public static TimeManager gTimeManager;
     public static CropManager gCropManager;
     public static ScreenTransition gScreenTransition;
